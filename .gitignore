@@ -1,0 +1,8 @@
+.*.swp
+*.o
+*.so
+*.bc
+*.egg-info
+*.DS_Store
+.hypothesis
+__pycache__
