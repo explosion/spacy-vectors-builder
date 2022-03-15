@@ -328,10 +328,10 @@ commands:
     help: "Concatenate tokenized input texts"
     script:
       - "mkdir -p ${vars.vector_input_dir}"
-      - "sh -c \"cat ${vars.tokenized_dir}/${vars.lang}_wiki_${vars.wikipedia_version}.txt ${vars.extracted_dir}/opensubtitles/${vars.lang}.txt ${vars.tokenized_dir}/${vars.lang}_newscrawl_${vars.newscrawl_year}.txt ${vars.tokenized_dir}/${vars.lang}_oscar_${vars.oscar_dataset_subset}.txt > ${vars.vector_input_dir}/${vars.lang}.txt\""
+      - "sh -c \"cat ${vars.tokenized_dir}/${vars.lang}_wiki_${vars.wikipedia_version}.txt ${vars.tokenized_dir}/opensubtitles/${vars.lang}.txt ${vars.tokenized_dir}/${vars.lang}_newscrawl_${vars.newscrawl_year}.txt ${vars.tokenized_dir}/${vars.lang}_oscar_${vars.oscar_dataset_subset}.txt > ${vars.vector_input_dir}/${vars.lang}.txt\""
     deps:
       - "${vars.tokenized_dir}/${vars.lang}_wiki_${vars.wikipedia_version}.txt"
-      - "${vars.extracted_dir}/opensubtitles/${vars.lang}.txt"
+      - "${vars.tokenized_dir}/opensubtitles/${vars.lang}.txt"
       - "${vars.tokenized_dir}/${vars.lang}_newscrawl_${vars.newscrawl_year}.txt"
       - "${vars.tokenized_dir}/${vars.lang}_oscar_${vars.oscar_dataset_subset}.txt"
     outputs:
