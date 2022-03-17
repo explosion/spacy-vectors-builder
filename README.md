@@ -37,40 +37,17 @@ Install `Wikiparsec`: https://github.com/rspeer/wikiparsec
 Choose a current version available at https://dumps.wikimedia.org for this
 language or switch to `"latest"`.
 
-If you have trouble using `Wikiparsec`, a Python-only alternative is
-[WikiExtractor](https://github.com/attardi/wikiextractor). The following
-command parses Wikipedia XML into JSONL as a single file:
-
-```shell
-wikiextractor -o /output/kowiki-20220201 -b 1000G --json --no-templates -q kowiki-20220201-pages-articles.xml
-```
-
-The JSONL format isn't supported directly by `tokenize_resource.py`, but the
-main missing step is to extract `line["text"]` for each line in the output
-`/output/kowiki-20220201/AA/wiki_00`.
-
 #### OSCAR 21.09
 
 The dataset [`oscar/OSCAR-2109`](https://huggingface.co/datasets/oscar-corpus/OSCAR-2109) requires you to:
 - create a Hugging Face Hub account
 - agree to the dataset terms to access: https://huggingface.co/datasets/oscar-corpus/OSCAR-2109
 - authenticate with `huggingface-cli login`
-- install [git lfs](https://git-lfs.github.com/)
-
-The dataset `oscar/OSCAR-2109` is downloaded locally and the dataset loader is
-patched to correct alignment issues. The raw compressed data is downloaded
-for the specified language only.
-
-**DO NOT USE** the original dataset `"oscar/OSCAR-2109"` because the data is
-misaligned and truncated (as of February 2022):
-https://github.com/oscar-corpus/corpus/issues/18
 
 #### OSCAR 2019
 
 As an alternative to OSCAR 21.09, you can stream from
-[`oscar`](https://huggingface.co/oscar) without authentication, git lfs, or
-quite as much local hard drive space, especially if you limit the number of
-texts with `oscar_max_texts`.
+[`oscar`](https://huggingface.co/oscar) without authentication.
 
 ## floret Parameters
 
@@ -171,7 +148,6 @@ Commands are only re-run if their inputs have changed.
 | `tokenize-opensubtitles` | Tokenize OpenSubtitles |
 | `extract-newscrawl` | Extract newscrawl data |
 | `tokenize-newscrawl` | Tokenize newscrawl |
-| `oscar-2109-setup` | Prepare local OSCAR 2109 repository with bug fixes |
 | `tokenize-oscar` | Tokenize and sentencize oscar dataset |
 | `create-input` | Concatenate tokenized input texts |
 | `compile-floret` | Compile floret |
@@ -188,7 +164,7 @@ inputs have changed.
 
 | Workflow | Steps |
 | --- | --- |
-| `prepare-text` | `extract-wikipedia` &rarr; `tokenize-wikipedia` &rarr; `extract-opensubtitles` &rarr; `tokenize-opensubtitles` &rarr; `extract-newscrawl` &rarr; `tokenize-newscrawl` &rarr; `oscar-2109-setup` &rarr; `tokenize-oscar` &rarr; `create-input` |
+| `prepare-text` | `extract-wikipedia` &rarr; `tokenize-wikipedia` &rarr; `extract-opensubtitles` &rarr; `tokenize-opensubtitles` &rarr; `extract-newscrawl` &rarr; `tokenize-newscrawl` &rarr; `tokenize-oscar` &rarr; `create-input` |
 | `train-vectors` | `compile-floret` &rarr; `train-floret-vectors-md` &rarr; `train-floret-vectors-lg` |
 
 ### 🗂 Assets
