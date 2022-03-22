@@ -235,7 +235,7 @@ commands:
       - >-
         python scripts/tokenize_resource.py ${vars.lang}
         ${vars.tokenized_dir}/${vars.lang}_opensubtitles.txt
-        --input-file ${vars.extracted_dir}/opensubtitles/fi.txt
+        --input-file ${vars.extracted_dir}/opensubtitles/${vars.lang}.txt
         --n-process ${vars.n_process_tokenize}
     deps:
       - "scripts/tokenize_resource.py"
