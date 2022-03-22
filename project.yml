@@ -174,7 +174,7 @@ assets:
     url: "http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/mono/OpenSubtitles.raw.${vars.lang}.gz"
 
   - dest: "${vars.downloaded_dir}/newscrawl/${vars.lang}/news.${vars.newscrawl_year}.${vars.lang}.shuffled.deduped.gz"
-    url: "https://data.statmt.org/news-crawl/fi/news.${vars.newscrawl_year}.${vars.lang}.shuffled.deduped.gz"
+    url: "https://data.statmt.org/news-crawl/${vars.lang}/news.${vars.newscrawl_year}.${vars.lang}.shuffled.deduped.gz"
 
 workflows:
   prepare-text:
