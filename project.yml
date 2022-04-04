@@ -287,9 +287,15 @@ commands:
   - name: "create-input"
     help: "Concatenate tokenized input texts"
     script:
-      - "mkdir -p ${vars.vector_input_dir}"
-      - "sh -c \"cat ${vars.tokenized_dir}/${vars.lang}_wiki_${vars.wikipedia_version}.txt ${vars.tokenized_dir}/${vars.lang}_opensubtitles.txt ${vars.tokenized_dir}/${vars.lang}_newscrawl_${vars.newscrawl_year}.txt ${vars.tokenized_dir}/${vars.lang}_oscar_${vars.oscar_dataset_subset}.txt > ${vars.vector_input_dir}/${vars.lang}.txt\""
+      - >-
+        python scripts/concat_files.py
+        --input-file ${vars.tokenized_dir}/${vars.lang}_wiki_${vars.wikipedia_version}.txt
+        --input-file ${vars.tokenized_dir}/${vars.lang}_opensubtitles.txt
+        --input-file ${vars.tokenized_dir}/${vars.lang}_newscrawl_${vars.newscrawl_year}.txt
+        --input-file ${vars.tokenized_dir}/${vars.lang}_oscar_${vars.oscar_dataset_subset}.txt
+        ${vars.vector_input_dir}/${vars.lang}.txt
     deps:
+      - "scripts/concat_files.py"
       - "${vars.tokenized_dir}/${vars.lang}_wiki_${vars.wikipedia_version}.txt"
       - "${vars.tokenized_dir}/${vars.lang}_opensubtitles.txt"
       - "${vars.tokenized_dir}/${vars.lang}_newscrawl_${vars.newscrawl_year}.txt"
