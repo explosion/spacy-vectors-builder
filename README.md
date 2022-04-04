@@ -47,7 +47,7 @@ The dataset [`oscar/OSCAR-2109`](https://huggingface.co/datasets/oscar-corpus/OS
 #### OSCAR 2019
 
 As an alternative to OSCAR 21.09, you can stream from
-[`oscar`](https://huggingface.co/oscar) without authentication.
+[`oscar`](https://huggingface.co/datasets/oscar) without authentication.
 
 ## floret Parameters
 
