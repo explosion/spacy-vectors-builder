@@ -17,6 +17,10 @@ Prerequisites:
 
 Adjust the variables `n_process_tokenize` and `vector_thread` for your CPU.
 
+> For a Python-only cross-platform alternative, try out the simpler
+> [`pipelines/floret_wiki_oscar_vectors`](https://github.com/explosion/projects/tree/v3/pipelines/floret_wiki_oscar_vectors)
+> project using Wikipedia and OSCAR 2019.
+
 ## Text Sources
 
 - Wikipedia: https://dumps.wikimedia.org
