@@ -43,7 +43,8 @@ language or switch to `"latest"`.
 
 #### OSCAR 21.09
 
-The dataset [`oscar/OSCAR-2109`](https://huggingface.co/datasets/oscar-corpus/OSCAR-2109) requires you to:
+The dataset [`oscar-corpus/OSCAR-2109`](https://huggingface.co/datasets/oscar-corpus/OSCAR-2109)
+requires you to:
 - create a Hugging Face Hub account
 - agree to the dataset terms to access: https://huggingface.co/datasets/oscar-corpus/OSCAR-2109
 - authenticate with `huggingface-cli login`
