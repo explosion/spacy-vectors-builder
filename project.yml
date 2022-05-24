@@ -129,16 +129,16 @@ description: |
   floret always writes the full `.bin` and `.vec` files after training. These
   may be 5GB+ each even though the final `.floret` table is much smaller.
 
-spacy_version: ">=3.2.0,<4.0.0"
+spacy_version: ">=3.3.0,<4.0.0"
 vars:
   name: "vectors"
-  lang: "ko"
-  n_process_tokenize: 16
+  lang: "en"
+  n_process_tokenize: 12
   # The defaults assume that you have a large hard drive mounted under /scratch.
   downloaded_dir: "/scratch/vectors/downloaded"
   extracted_dir: "/scratch/vectors/extracted"
   tokenized_dir: "/scratch/vectors/tokenized"
-  wikipedia_version: 20220201
+  wikipedia_version: 20220301
   newscrawl_year: 2020
   oscar_dataset: "oscar-corpus/OSCAR-2109"
   oscar_dataset_subset: "deduplicated_${vars.lang}"
@@ -146,21 +146,21 @@ vars:
   #oscar_dataset: "oscar"
   #oscar_dataset_subset: "unshuffled_deduplicated_${vars.lang}"
   oscar_dataset_split: "train"
-  oscar_max_texts: -1
+  oscar_max_texts: 10000000
   vector_input_dir: "/scratch/vectors/input"
   vector_model: "cbow"
   # For languages with alphabets: minn/maxn 4/5 or 5/5 is a good starting point.
-  vector_minn: 2
-  vector_maxn: 3
+  vector_minn: 5
+  vector_maxn: 5
   vector_epoch: 5
   vector_dim: 300
   vector_neg: 10
   vector_bucket_md: 50000
   vector_bucket_lg: 200000
-  vector_min_count: 20
+  vector_min_count: 100
   vector_hash_count: 2
-  vector_thread: 16
-  vector_lr: 0.05
+  vector_thread: 12
+  vector_lr: 0.00001
 
 directories: ["software", "vectors"]
 
@@ -195,6 +195,7 @@ workflows:
     - compile-floret
     - train-floret-vectors-md
     - train-floret-vectors-lg
+    - train-fasttext-vectors
 
 commands:
   - name: "extract-wikipedia"
@@ -204,8 +205,8 @@ commands:
       - "scripts/extract_wikipedia.sh ${vars.downloaded_dir}/wikipedia/${vars.lang}wiki-${vars.wikipedia_version}-pages-articles.xml.bz2 ${vars.extracted_dir}/wikipedia/${vars.lang}wiki_${vars.wikipedia_version}.txt"
     deps:
       - "scripts/extract_wikipedia.sh"
-    outputs:
-      - "${vars.extracted_dir}/wikipedia/${vars.lang}wiki_${vars.wikipedia_version}.txt"
+    #outputs:
+      #- "${vars.extracted_dir}/wikipedia/${vars.lang}wiki_${vars.wikipedia_version}.txt"
 
   - name: "tokenize-wikipedia"
     help: "Tokenize Wikipedia"
@@ -218,9 +219,9 @@ commands:
         --n-process ${vars.n_process_tokenize}
     deps:
       - "scripts/tokenize_resource.py"
-      - "${vars.extracted_dir}/wikipedia/${vars.lang}wiki_${vars.wikipedia_version}.txt"
-    outputs:
-      - "${vars.tokenized_dir}/${vars.lang}_wiki_${vars.wikipedia_version}.txt"
+      #- "${vars.extracted_dir}/wikipedia/${vars.lang}wiki_${vars.wikipedia_version}.txt"
+    #outputs:
+      #- "${vars.tokenized_dir}/${vars.lang}_wiki_${vars.wikipedia_version}.txt"
 
   - name: "extract-opensubtitles"
     help: "Extract OpenSubtitles data"
@@ -229,8 +230,8 @@ commands:
       - "scripts/extract_opensubtitles.sh ${vars.downloaded_dir}/opensubtitles/${vars.lang}.txt.gz ${vars.extracted_dir}/opensubtitles/${vars.lang}.txt"
     deps:
       - "scripts/extract_opensubtitles.sh"
-    outputs:
-      - "${vars.extracted_dir}/opensubtitles/${vars.lang}.txt"
+    #outputs:
+      #- "${vars.extracted_dir}/opensubtitles/${vars.lang}.txt"
 
   - name: "tokenize-opensubtitles"
     help: "Tokenize OpenSubtitles"
@@ -243,9 +244,9 @@ commands:
         --n-process ${vars.n_process_tokenize}
     deps:
       - "scripts/tokenize_resource.py"
-      - "${vars.extracted_dir}/opensubtitles/${vars.lang}.txt"
-    outputs:
-      - "${vars.tokenized_dir}/${vars.lang}_opensubtitles.txt"
+      #- "${vars.extracted_dir}/opensubtitles/${vars.lang}.txt"
+    #outputs:
+      #- "${vars.tokenized_dir}/${vars.lang}_opensubtitles.txt"
 
   - name: "extract-newscrawl"
     help: "Extract newscrawl data"
@@ -253,8 +254,8 @@ commands:
       - "mkdir -p ${vars.extracted_dir}/newscrawl/"
       - "pigz -d -k ${vars.downloaded_dir}/newscrawl/${vars.lang}/news.${vars.newscrawl_year}.${vars.lang}.shuffled.deduped.gz"
       - "mv ${vars.downloaded_dir}/newscrawl/${vars.lang}/news.${vars.newscrawl_year}.${vars.lang}.shuffled.deduped ${vars.extracted_dir}/newscrawl"
-    outputs:
-      - "${vars.extracted_dir}/newscrawl/news.${vars.newscrawl_year}.${vars.lang}.shuffled.deduped"
+    #outputs:
+      #- "${vars.extracted_dir}/newscrawl/news.${vars.newscrawl_year}.${vars.lang}.shuffled.deduped"
 
   - name: "tokenize-newscrawl"
     help: "Tokenize newscrawl"
@@ -267,9 +268,9 @@ commands:
         --n-process ${vars.n_process_tokenize}
     deps:
       - "scripts/tokenize_resource.py"
-      - "${vars.extracted_dir}/newscrawl/news.${vars.newscrawl_year}.${vars.lang}.shuffled.deduped"
-    outputs:
-      - "${vars.tokenized_dir}/${vars.lang}_newscrawl_${vars.newscrawl_year}.txt"
+      #- "${vars.extracted_dir}/newscrawl/news.${vars.newscrawl_year}.${vars.lang}.shuffled.deduped"
+    #outputs:
+      #- "${vars.tokenized_dir}/${vars.lang}_newscrawl_${vars.newscrawl_year}.txt"
 
   - name: "tokenize-oscar"
     help: "Tokenize and sentencize oscar dataset"
@@ -285,8 +286,8 @@ commands:
         --max-texts=${vars.oscar_max_texts}
     deps:
       - "scripts/tokenize_resource.py"
-    outputs:
-      - "${vars.tokenized_dir}/${vars.lang}_oscar_${vars.oscar_dataset_subset}.txt"
+    #outputs:
+      #- "${vars.tokenized_dir}/${vars.lang}_oscar_${vars.oscar_dataset_subset}.txt"
 
   - name: "create-input"
     help: "Concatenate tokenized input texts"
@@ -300,12 +301,12 @@ commands:
         ${vars.vector_input_dir}/${vars.lang}.txt
     deps:
       - "scripts/concat_files.py"
-      - "${vars.tokenized_dir}/${vars.lang}_wiki_${vars.wikipedia_version}.txt"
-      - "${vars.tokenized_dir}/${vars.lang}_opensubtitles.txt"
-      - "${vars.tokenized_dir}/${vars.lang}_newscrawl_${vars.newscrawl_year}.txt"
-      - "${vars.tokenized_dir}/${vars.lang}_oscar_${vars.oscar_dataset_subset}.txt"
-    outputs:
-      - "${vars.vector_input_dir}/${vars.lang}.txt"
+      #- "${vars.tokenized_dir}/${vars.lang}_wiki_${vars.wikipedia_version}.txt"
+      #- "${vars.tokenized_dir}/${vars.lang}_opensubtitles.txt"
+      #- "${vars.tokenized_dir}/${vars.lang}_newscrawl_${vars.newscrawl_year}.txt"
+      #- "${vars.tokenized_dir}/${vars.lang}_oscar_${vars.oscar_dataset_subset}.txt"
+    #outputs:
+      #- "${vars.vector_input_dir}/${vars.lang}.txt"
 
   - name: "compile-floret"
     help: "Compile floret"
@@ -334,7 +335,7 @@ commands:
         -output vectors/${vars.lang}_md
     deps:
       - "software/floret"
-      - "${vars.vector_input_dir}/${vars.lang}.txt"
+      #- "${vars.vector_input_dir}/${vars.lang}.txt"
     outputs:
       - "vectors/${vars.lang}_md.floret"
 
@@ -358,7 +359,7 @@ commands:
         -output vectors/${vars.lang}_lg
     deps:
       - "software/floret"
-      - "${vars.vector_input_dir}/${vars.lang}.txt"
+      #- "${vars.vector_input_dir}/${vars.lang}.txt"
     outputs:
       - "vectors/${vars.lang}_lg.floret"
 
@@ -380,6 +381,6 @@ commands:
         -output vectors/${vars.lang}.fasttext
     deps:
       - "software/floret"
-      - "${vars.vector_input_dir}/${vars.lang}.txt"
+      #- "${vars.vector_input_dir}/${vars.lang}.txt"
     outputs:
       - "vectors/${vars.lang}.fasttext.vec"
