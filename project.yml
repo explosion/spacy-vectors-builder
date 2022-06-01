@@ -157,10 +157,10 @@ vars:
   vector_neg: 10
   vector_bucket_md: 50000
   vector_bucket_lg: 200000
-  vector_min_count: 50
+  vector_min_count: 150
   vector_hash_count: 2
   vector_thread: 12
-  vector_lr: 0.00001
+  vector_lr: 0.01
 
 directories: ["software", "vectors"]
 
