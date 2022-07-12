@@ -3,9 +3,6 @@ description: |
   This project downloads, extracts and preprocesses texts from a number of
   sources and trains vectors with [floret](https://github.com/explosion/floret).
 
-  By default, the project trains floret vectors for Korean for use in `md` and
-  `lg` spaCy pipelines.
-
   Prerequisites:
   - linux (it may largely work on osx but this is not tested or maintained)
   - a large amount of hard drive space (e.g. ~100GB total for Korean, which has
