@@ -5,9 +5,6 @@
 This project downloads, extracts and preprocesses texts from a number of
 sources and trains vectors with [floret](https://github.com/explosion/floret).
 
-By default, the project trains floret vectors for Korean for use in `md` and
-`lg` spaCy pipelines.
-
 Prerequisites:
 - linux (it may largely work on osx but this is not tested or maintained)
 - a large amount of hard drive space (e.g. ~100GB total for Korean, which has
@@ -43,8 +40,7 @@ language or switch to `"latest"`.
 
 #### OSCAR 21.09
 
-The dataset [`oscar-corpus/OSCAR-2109`](https://huggingface.co/datasets/oscar-corpus/OSCAR-2109)
-requires you to:
+The dataset [`oscar-corpus/OSCAR-2109`](https://huggingface.co/datasets/oscar-corpus/OSCAR-2109) requires you to:
 - create a Hugging Face Hub account
 - agree to the dataset terms to access: https://huggingface.co/datasets/oscar-corpus/OSCAR-2109
 - authenticate with `huggingface-cli login`
@@ -170,7 +166,7 @@ inputs have changed.
 | Workflow | Steps |
 | --- | --- |
 | `prepare-text` | `extract-wikipedia` &rarr; `tokenize-wikipedia` &rarr; `extract-opensubtitles` &rarr; `tokenize-opensubtitles` &rarr; `extract-newscrawl` &rarr; `tokenize-newscrawl` &rarr; `tokenize-oscar` &rarr; `create-input` |
-| `train-vectors` | `compile-floret` &rarr; `train-floret-vectors-md` &rarr; `train-floret-vectors-lg` |
+| `train-vectors` | `compile-floret` &rarr; `train-floret-vectors-md` &rarr; `train-floret-vectors-lg` &rarr; `train-fasttext-vectors` |
 
 ### 🗂 Assets
 
@@ -181,8 +177,8 @@ in the project directory.
 | File | Source | Description |
 | --- | --- | --- |
 | `software/floret` | Git |  |
-| `/scratch/vectors/downloaded/wikipedia/kowiki-20220201-pages-articles.xml.bz2` | URL |  |
-| `/scratch/vectors/downloaded/opensubtitles/ko.txt.gz` | URL |  |
-| `/scratch/vectors/downloaded/newscrawl/ko/news.2020.ko.shuffled.deduped.gz` | URL |  |
+| `/scratch/vectors/downloaded/wikipedia/enwiki-20220301-pages-articles.xml.bz2` | URL |  |
+| `/scratch/vectors/downloaded/opensubtitles/en.txt.gz` | URL |  |
+| `/scratch/vectors/downloaded/newscrawl/en/news.2020.en.shuffled.deduped.gz` | URL |  |
 
 <!-- SPACY PROJECT: AUTO-GENERATED DOCS END (do not remove) -->
