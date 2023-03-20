@@ -43,8 +43,7 @@ language or switch to `"latest"`.
 
 #### OSCAR 21.09
 
-The dataset [`oscar-corpus/OSCAR-2109`](https://huggingface.co/datasets/oscar-corpus/OSCAR-2109)
-requires you to:
+The dataset [`oscar-corpus/OSCAR-2109`](https://huggingface.co/datasets/oscar-corpus/OSCAR-2109) requires you to:
 - create a Hugging Face Hub account
 - agree to the dataset terms to access: https://huggingface.co/datasets/oscar-corpus/OSCAR-2109
 - authenticate with `huggingface-cli login`
@@ -151,8 +150,6 @@ Commands are only re-run if their inputs have changed.
 | `tokenize-wikipedia` | Tokenize Wikipedia |
 | `extract-opensubtitles` | Extract OpenSubtitles data |
 | `tokenize-opensubtitles` | Tokenize OpenSubtitles |
-| `extract-newscrawl` | Extract newscrawl data |
-| `tokenize-newscrawl` | Tokenize newscrawl |
 | `tokenize-oscar` | Tokenize and sentencize oscar dataset |
 | `create-input` | Concatenate tokenized input texts |
 | `compile-floret` | Compile floret |
@@ -169,7 +166,7 @@ inputs have changed.
 
 | Workflow | Steps |
 | --- | --- |
-| `prepare-text` | `extract-wikipedia` &rarr; `tokenize-wikipedia` &rarr; `extract-opensubtitles` &rarr; `tokenize-opensubtitles` &rarr; `extract-newscrawl` &rarr; `tokenize-newscrawl` &rarr; `tokenize-oscar` &rarr; `create-input` |
+| `prepare-text` | `extract-wikipedia` &rarr; `tokenize-wikipedia` &rarr; `extract-opensubtitles` &rarr; `tokenize-opensubtitles` &rarr; `tokenize-oscar` &rarr; `create-input` |
 | `train-vectors` | `compile-floret` &rarr; `train-floret-vectors-md` &rarr; `train-floret-vectors-lg` |
 
 ### 🗂 Assets
@@ -181,8 +178,7 @@ in the project directory.
 | File | Source | Description |
 | --- | --- | --- |
 | `software/floret` | Git |  |
-| `/scratch/vectors/downloaded/wikipedia/kowiki-20220201-pages-articles.xml.bz2` | URL |  |
-| `/scratch/vectors/downloaded/opensubtitles/ko.txt.gz` | URL |  |
-| `/scratch/vectors/downloaded/newscrawl/ko/news.2020.ko.shuffled.deduped.gz` | URL |  |
+| `/scratch/vectors/downloaded/wikipedia/slwiki-20230220-pages-articles.xml.bz2` | URL |  |
+| `/scratch/vectors/downloaded/opensubtitles/sl.txt.gz` | URL |  |
 
 <!-- SPACY PROJECT: AUTO-GENERATED DOCS END (do not remove) -->
