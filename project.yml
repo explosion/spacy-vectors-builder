@@ -132,14 +132,14 @@ description: |
 spacy_version: ">=3.2.0,<4.0.0"
 vars:
   name: "vectors"
-  lang: "ko"
+  lang: "sr"
   n_process_tokenize: 16
   # The defaults assume that you have a large hard drive mounted under /scratch.
   downloaded_dir: "/scratch/vectors/downloaded"
   extracted_dir: "/scratch/vectors/extracted"
   tokenized_dir: "/scratch/vectors/tokenized"
-  wikipedia_version: 20220201
-  newscrawl_year: 2020
+  wikipedia_version: 20230301
+  newscrawl_year: 2021
   oscar_dataset: "oscar-corpus/OSCAR-2109"
   oscar_dataset_subset: "deduplicated_${vars.lang}"
   # For "oscar" instead of OSCAR-2109 (no auth required).
@@ -150,16 +150,16 @@ vars:
   vector_input_dir: "/scratch/vectors/input"
   vector_model: "cbow"
   # For languages with alphabets: minn/maxn 4/5 or 5/5 is a good starting point.
-  vector_minn: 2
-  vector_maxn: 3
+  vector_minn: 4
+  vector_maxn: 5
   vector_epoch: 5
   vector_dim: 300
   vector_neg: 10
   vector_bucket_md: 50000
   vector_bucket_lg: 200000
-  vector_min_count: 20
+  vector_min_count: 75
   vector_hash_count: 2
-  vector_thread: 16
+  vector_thread: 12
   vector_lr: 0.05
 
 directories: ["software", "vectors"]
