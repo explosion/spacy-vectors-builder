@@ -43,8 +43,7 @@ language or switch to `"latest"`.
 
 #### OSCAR 21.09
 
-The dataset [`oscar-corpus/OSCAR-2109`](https://huggingface.co/datasets/oscar-corpus/OSCAR-2109)
-requires you to:
+The dataset [`oscar-corpus/OSCAR-2109`](https://huggingface.co/datasets/oscar-corpus/OSCAR-2109) requires you to:
 - create a Hugging Face Hub account
 - agree to the dataset terms to access: https://huggingface.co/datasets/oscar-corpus/OSCAR-2109
 - authenticate with `huggingface-cli login`
@@ -181,8 +180,8 @@ in the project directory.
 | File | Source | Description |
 | --- | --- | --- |
 | `software/floret` | Git |  |
-| `/scratch/vectors/downloaded/wikipedia/kowiki-20220201-pages-articles.xml.bz2` | URL |  |
-| `/scratch/vectors/downloaded/opensubtitles/ko.txt.gz` | URL |  |
-| `/scratch/vectors/downloaded/newscrawl/ko/news.2020.ko.shuffled.deduped.gz` | URL |  |
+| `/scratch/vectors/downloaded/wikipedia/srwiki-20230301-pages-articles.xml.bz2` | URL |  |
+| `/scratch/vectors/downloaded/opensubtitles/sr.txt.gz` | URL |  |
+| `/scratch/vectors/downloaded/newscrawl/sr/news.2021.sr.shuffled.deduped.gz` | URL |  |
 
 <!-- SPACY PROJECT: AUTO-GENERATED DOCS END (do not remove) -->
