@@ -50,9 +50,9 @@ def main(
 
     if input_file:
         if max_texts > 0:
-            texts = islice(open(input_file), max_texts)
+            texts = islice(open(input_file, encoding="utf8"), max_texts)
         else:
-            texts = open(input_file)
+            texts = open(input_file, encoding="utf8")
     elif input_dataset:
         dataset = load_dataset(
             input_dataset,
@@ -66,7 +66,7 @@ def main(
         else:
             texts = (line["text"] for line in dataset)
 
-    with open(output_file, "w") as output_fileh, Pool(processes=n_process) as pool:
+    with open(output_file, "w", encoding="utf-8") as output_fileh, Pool(processes=n_process) as pool:
         result = pool.imap(partial(tokenize_batch, nlp), chunked(texts, batch_size))
         for lines in result:
             output_fileh.writelines(lines)
